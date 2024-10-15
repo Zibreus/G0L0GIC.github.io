@@ -256,6 +256,21 @@
             line-height: 1.5; 
         }
 
+        /* 物品展示区块 */
+        #itemImageDisplay {
+            position: absolute;
+            right: 700px; 
+            top: 170px; 
+            width: 500px; 
+            height: 500px; 
+            background-color: rgba(241, 241, 241, 0.5); /* 背景颜色可调整 */
+            padding: 10px;
+        }
+
+        #itemImageDisplay img {
+            width: 100%; 
+            height: auto;
+        }
     </style>
 </head>
 
@@ -293,6 +308,7 @@
             <div class="item-slot" onmouseover="showText('物品1')" onclick="selectItem(1)">
                 <img id="slot1" src="UI/goods/goods1.png" alt="物品1">
                 <div class="item-text">物品名称</div>
+                
             </div>
             <div class="item-slot" onmouseover="showText('物品2')" onclick="selectItem(2)">
                 <img id="slot2" src="UI/goods/goods2.png" alt="物品2">
@@ -331,6 +347,9 @@
                 <div class="item-text">物品名称</div>
             </div>
             <!-- 添加更多物品格子，但是物品格子就10个暂时应该足够了 -->
+        </div>
+        <div id="itemImageDisplay">
+            <img id="itemImage" src="" alt=" " style="width: 100%; height: auto;">
         </div>
          <!-- 物品解释区块 -->
         <div id="itemDescription">
@@ -375,18 +394,20 @@
         }
 
         function showText(itemIndex) {
-            const itemDescription = document.getElementById('itemDescription');
             const descriptionText = document.querySelector('.description-text');
             const descriptionText2 = document.querySelector('.description-text2');
+            const itemImage = document.getElementById('itemImage');
             
             switch(itemIndex) {
                 case 1:
                     descriptionText.innerText = "样例1";
                     descriptionText2.innerText = "物品1的详细解释，这里多打一段用于测试自动换行功能。";
+                    itemImage.src = "UI/goods/goods1b.png"; // 替换为物品1的图片路径
                     break;
                 case 2:
                     descriptionText.innerText = "样例2";
                     descriptionText2.innerText = "物品2的详细解释。";
+                    itemImage.src = "UI/goods/goods2b.png"; // 替换为物品2的图片路径
                     break;
                 case 3:
                 case 4:
@@ -398,20 +419,24 @@
                 case 10:
                     descriptionText.innerText = "样例3（空物品）";
                     descriptionText2.innerText = "这是物品0的详细解释（空物品，实际使用中这个不填文字就行）";
+                    itemImage.src = ""; // 清除图片
                     break;
                 default:
                     descriptionText.innerText = "";
                     descriptionText2.innerText = "";
+                    itemImage.src = ""; // 清除图片
             }
         }
 
         // 在格子上添加鼠标移出事件来重置文本
         function resetText() {
-            const itemDescription = document.getElementById('itemDescription');
             const descriptionText = document.querySelector('.description-text');
             const descriptionText2 = document.querySelector('.description-text2');
+            const itemImage = document.getElementById('itemImage');
+            
             descriptionText.innerText = "";
             descriptionText2.innerText = "";
+            itemImage.src = ""; // 清除图片
         }
 
         // 为每个item-slot添加mouseover和mouseout事件
